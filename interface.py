@@ -1,3 +1,6 @@
+from player import Player
+
+
 class Interface():
     def __init__(self):
         self._width_of_board = self.read_width_of_board()
@@ -5,6 +8,9 @@ class Interface():
         table = [['0'] * int(self.width_of_board()) for _ in range(int(self.height_of_board()))]
         self.table_board = table
         self.initial_layout()
+        player1 = Player("black")
+        player2 = Player("white")
+        print("Początkowy wygląd planszy:")
         self.draw_board()
 
     def read_width_of_board(self):
@@ -32,9 +38,6 @@ class Interface():
         self.table_board[height][width + 1] = 'C'
         self.table_board[height + 1][width] = 'C'
         self.table_board[height + 1][width + 1] = 'B'
-
-    def player_1_move(self):
-        self.place = input("Podaj miejsce ruchu: \n")
 
     def draw_board(self):
         for i in range(self.height_of_board()):
