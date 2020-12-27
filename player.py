@@ -1,5 +1,6 @@
 class Player:
-    def __init__(self, nickname, color):
+    def __init__(self, color=''):
+        nickname = input("Podaj nazwę gracza: ")
         self._name = nickname
         self._points = 2
         self._color = color
@@ -15,3 +16,6 @@ class Player:
 
     def color(self):
         return self._color
+
+    def move_on_board(self):
+        place = input(f'Teraz ruch gracza: {self.name()}')
