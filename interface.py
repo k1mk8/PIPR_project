@@ -1,27 +1,41 @@
-import sys
-
-
 class Interface():
     def __init__(self):
-        board = input("Podaj wielkość planszy z zakresu od 8 do 30: \n")
-        while int(board) not in range(8, 31):
-            board = input("Podaj wielkość planszy z zakresu od 8 do 30: \n")
-            if board == '^[':
-                sys.exit()
-        self._size_of_board = int(board)
+        self._width_of_board = self.read_width_of_board()
+        self._height_of_board = self.read_height_of_board()
+        table = [['0'] * int(self.width_of_board()) for _ in range(int(self.height_of_board()))]
+        self.table_board = table
+        self.initial_layout()
         self.draw_board()
 
-    def size_of_board(self):
-        return self._size_of_board
+    def read_width_of_board(self):
+        width_of_board = input("Podaj szerokość planszy z zakresu od 8 do 30: \n")
+        while int(width_of_board) not in range(8, 31):
+            width_of_board = input("Podaj wielkość planszy z zakresu od 8 do 30: \n")
+        return int(width_of_board)
+
+    def read_height_of_board(self):
+        height_of_board = input("Podaj wysokość planszy z zakresu od 8 do 30: \n")
+        while int(height_of_board) not in range(8, 31):
+            height_of_board = input("Podaj wielkość planszy z zakresu od 8 do 30: \n")
+        return int(height_of_board)
+
+    def width_of_board(self):
+        return self._width_of_board
+
+    def height_of_board(self):
+        return self._height_of_board
+
+    def initial_layout(self):
+        height = self.height_of_board()//2 - 1
+        width = self.width_of_board()//2 - 1
+        self.table_board[height][width] = 'B'
+        self.table_board[height][width + 1] = 'C'
+        self.table_board[height + 1][width] = 'C'
+        self.table_board[height + 1][width + 1] = 'B'
 
     def player_1_move(self):
         self.place = input("Podaj miejsce ruchu: \n")
 
     def draw_board(self):
-        board = self.size_of_board()
-        for i in range(1, board+1):
-            row = ''
-            for j in range(1, board+1):
-                row += "O "
-            print(row)
-
+        for i in range(self.height_of_board()):
+            print(self.table_board[i])
