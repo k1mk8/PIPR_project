@@ -8,11 +8,10 @@ class Interface():
         table = [['0'] * int(self.width_of_board()) for _ in range(int(self.height_of_board()))]
         self.table_board = table
         self.initial_layout()
-        player1 = Player("black")
-        player2 = Player("white")
         print("Początkowy wygląd planszy:")
         self.draw_board()
-
+        self.choose_option()
+    
     def read_width_of_board(self):
         width_of_board = input("Podaj szerokość planszy z zakresu od 8 do 30: \n")
         while int(width_of_board) not in range(8, 31):
@@ -42,3 +41,12 @@ class Interface():
     def draw_board(self):
         for i in range(self.height_of_board()):
             print(self.table_board[i])
+
+    def choose_option(self):
+        game_option = input("Wybierz opcje gry:\n1VS1\n1VSComputer\nComputerVSComputer\n")
+        while game_option not in ["1VS1", "1VSComputer", "ComputerVSComputer"]:
+            game_option = input("Wybierz prawidłową opcję gry:\n1VS1\n1VSComputer\nComputerVSComputer\n")
+        self._game_option = game_option
+
+    def game_option(self):
+        return self._game_option
