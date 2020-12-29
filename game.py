@@ -7,6 +7,7 @@ class Game():
     def __init__(self):
         self._interface = Interface()
         self._game_option = self._interface.game_option()
+        self.game_option()
 
     def player1(self):
         return self._player1
@@ -17,11 +18,11 @@ class Game():
     def game_option(self):
         game_option = self._game_option
         if game_option == "1VS1":
-            self.oneVSone(self)
+            self.oneVSone()
         elif game_option == "1VSComputer":
-            self.oneVSComputer(self)
+            self.oneVSComputer()
         elif game_option == "ComputerVSComputer":
-            self.ComputerVSComputer(self)
+            self.ComputerVSComputer()
 
     def oneVSone(self):
         self._player1 = Player("Black")
@@ -33,7 +34,10 @@ class Game():
         pass
 
     def ComputerVsComputer(self):
+        self._computer1 = Computer("Black")
+        self._computer2 = Computer("White")
         pass
+
 
 if __name__ == "__main__":
     Game()
