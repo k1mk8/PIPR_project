@@ -1,15 +1,17 @@
+from board import Board
+
+
 class Interface():
     def __init__(self):
-        self._width_of_board = self.read_width_of_board()
-        self._height_of_board = self.read_height_of_board()
-        height = self.height_of_board()
-        width = self.width_of_board()
-        table = [['0'] * width for _ in range(height)]
-        self.table_board = table
-        self.initial_layout()
+        width = self.read_width_of_board()
+        height = self.read_height_of_board()
+        self.board = Board(width, height)
         print("Początkowy wygląd planszy:")
-        self.draw_board()
+        self.board.start_board()
         self.choose_option()
+
+    def possible_moves(self):
+        return self._possible_moves
 
     def read_width_of_board(self):
         dictionary = {
@@ -28,24 +30,6 @@ class Interface():
         while int(height_of_board) not in range(8, 31):
             height_of_board = input(dictionary[2])
         return int(height_of_board)
-
-    def width_of_board(self):
-        return self._width_of_board
-
-    def height_of_board(self):
-        return self._height_of_board
-
-    def initial_layout(self):
-        height = self.height_of_board()//2 - 1
-        width = self.width_of_board()//2 - 1
-        self.table_board[height][width] = 'B'
-        self.table_board[height][width + 1] = 'C'
-        self.table_board[height + 1][width] = 'C'
-        self.table_board[height + 1][width + 1] = 'B'
-
-    def draw_board(self):
-        for i in range(self.height_of_board()):
-            print(self.table_board[i])
 
     def choose_option(self):
         dictionary = {
