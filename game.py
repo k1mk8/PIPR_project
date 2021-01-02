@@ -15,6 +15,9 @@ class Game():
     def player2(self):
         return self._player2
 
+    def interface(self):
+        return self._interface
+
     def game_option(self):
         game_option = self._game_option
         if game_option == "1VS1":
@@ -27,6 +30,11 @@ class Game():
     def oneVSone(self):
         self._player1 = Player("Black")
         self._player2 = Player("White")
+        possible_moves = self.interface().board.possible_moves()
+        total_points = self.player1().points() + self.player2().points()
+        while total_points < possible_moves:
+            self.player1().move_on_board()
+            self.player2().move_on_board()
 
     def oneVSComputer(self):
         self._player1 = Player("Black")
