@@ -18,4 +18,6 @@ class Player:
         return self._color
 
     def move_on_board(self):
-        place = input(f'Teraz ruch gracza: {self.name()}')
+        print(f'Teraz ruch gracza: {self.name()}')
+        row = input("Podaj numer wiersza:\n")
+        column = input("Podaj numer kolumny:\n")
