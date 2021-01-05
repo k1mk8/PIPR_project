@@ -27,9 +27,11 @@ class Player:
             if self.color() == "Black":
                 self.inrow(table, row, column, "Black")
                 self.incolumn(table, row, column, "Black")
+                self.diagonally(table, row, column, "Black")
             elif self.color() == "White":
                 self.inrow(table, row, column, "White")
                 self.incolumn(table, row, column, "White")
+                self.diagonally(table, row, column, "White")
 
     def inrow(self, table, row, column, name=""):
         if name == "Black":
@@ -64,7 +66,7 @@ class Player:
             if table[a][b] == f'{letter}':
                 break
             a += 1
-        for i in range(int(column), a):
+        for i in range(int(row), a):
             table[i][b] = f'{letter}'
         a = int(row) - 1
         b = int(column)
@@ -72,11 +74,23 @@ class Player:
             if table[a][b] == f'{letter}':
                 break
             a -= 1
-        for i in range(a + 1, int(column) + 1):
-            table[a][i] = f'{letter}'
+        for i in range(a + 1, int(row) + 1):
+            table[i][b] = f'{letter}'
 
     def diagonally(self, table, row, column, name=""):
         if name == "Black":
             letter = "C "
         elif name == "White":
             letter = "B "
+        a = int(row) - 1
+        b = int(column) - 1
+        while table[a][b] != "0 " and a > 0 and b > 0:
+            if table[a][b] == f'{letter}':
+                break
+            a -= 1
+            b -= 1
+        a += 1
+        b += 1
+        for i in range(a, int(column)):
+            table[i][b] = f'{letter}'
+            b += 1
