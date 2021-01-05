@@ -33,11 +33,15 @@ class Player:
                 self.incolumn(table, row, column, "White")
                 self.diagonally(table, row, column, "White")
 
-    def inrow(self, table, row, column, name=""):
+    def letter(self, name=""):
         if name == "Black":
             letter = "C "
         elif name == "White":
             letter = "B "
+        return letter
+
+    def inrow(self, table, row, column, name=""):
+        letter = self.letter(name)
         a = int(row)
         b = int(column) + 1
         while table[a][b] != "0 " and b < len(table):
@@ -56,10 +60,7 @@ class Player:
             table[a][i] = f'{letter}'
 
     def incolumn(self, table, row, column, name=""):
-        if name == "Black":
-            letter = "C "
-        elif name == "White":
-            letter = "B "
+        letter = self.letter(name)
         a = int(row) + 1
         b = int(column)
         while table[a][b] != "0 " and a < len(table):
@@ -78,10 +79,7 @@ class Player:
             table[i][b] = f'{letter}'
 
     def diagonally(self, table, row, column, name=""):
-        if name == "Black":
-            letter = "C "
-        elif name == "White":
-            letter = "B "
+        letter = self.letter(name)
         a = int(row) - 1
         b = int(column) - 1
         while table[a][b] != "0 " and a > 0 and b > 0:
@@ -91,6 +89,42 @@ class Player:
             b -= 1
         a += 1
         b += 1
-        for i in range(a, int(column)):
+        for i in range(a, int(row) + 1):
+            table[i][b] = f'{letter}'
+            b += 1
+        a = int(row) - 1
+        b = int(column) + 1
+        while table[a][b] != "0 " and a > 0 and b < len(table):
+            if table[a][b] == f'{letter}':
+                break
+            a -= 1
+            b += 1
+        a += 1
+        b -= 1
+        for i in range(a, int(row) + 1):
+            table[i][b] = f'{letter}'
+            b -= 1
+        a = int(row) - 1
+        b = int(column) - 1
+        while table[a][b] != "0 " and a < len(table) and b < len(table):
+            if table[a][b] == f'{letter}':
+                break
+            a += 1
+            b += 1
+        a -= 1
+        b -= 1
+        for i in range(int(row), a):
+            table[i][b] = f'{letter}'
+            b += 1
+        a = int(row) + 1
+        b = int(column) - 1
+        while table[a][b] != "0 " and a < len(table) and b > 0:
+            if table[a][b] == f'{letter}':
+                break
+            a += 1
+            b -= 1
+        a -= 1
+        b += 1
+        for i in range(int(row), a):
             table[i][b] = f'{letter}'
             b += 1
