@@ -3,7 +3,7 @@ class Board:
         self._width = width
         self._height = height
         self.make_board()
-        self._possible_moves = width * height - 4
+        self._possible_moves = width * height
 
     def width(self):
         return self._width
@@ -30,6 +30,7 @@ class Board:
                 table[i][0] = str(i)
         self.table_board = table
         self._possible_moves = height * width - 4
+        table[0][0] = "X "
 
     def draw_board(self):
         for i in range(self.height()+1):
