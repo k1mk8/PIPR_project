@@ -31,6 +31,20 @@ class Interface():
             height_of_board = input(dictionary[2])
         return int(height_of_board)
 
+    def after_game(self):
+        print("Wybierz co chcesz zrobić:\n")
+        print("1 - Ponowna gra\n")
+        print("2 - wybór opcji gry\n")
+        print("3 - zakończenie programu\n")
+        option = input()
+        while option not in [1, 2, 3]:
+            print("Wybierz co chcesz zrobić:\n")
+            print("1 - Ponowna gra\n")
+            print("2 - wybór opcji gry\n")
+            print("3 - zakończenie programu\n")
+            option = input()
+        return int(option)
+
     def choose_option(self):
         dictionary = {
             1: "Wybierz opcję gry:\n1VS1\n1VSComputer\nComputerVSComputer\n"
