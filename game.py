@@ -46,53 +46,65 @@ class Game():
 
     def game_option(self):
         """
-        Funkcja pozwala wybrać opcję gry
+        pozwala wybrać opcję gry
         wywołuje odpowiednią funkcję do przeprowadzania rozgrywki
         """
         game_option = self._game_option
-        if game_option == "1VS1":
+        if game_option == 1:
             self.oneVSone()
-        elif game_option == "1VSComputer":
+        elif game_option == 2:
             self.oneVSComputer()
-        elif game_option == "ComputerVSComputer":
+        elif game_option == 3:
             self.ComputerVSComputer()
 
     def oneVSone(self):
         """
-        Funckja obsługująca grę gracza z graczem
+        obsługująca grę gracza z graczem
         """
         self._player1 = Player("Black")
         self._player2 = Player("White")
         possible_moves = self.interface().board.total_points()
         self.play_game(self.player1(), self.player2(), possible_moves)
         self.who_win(self.player1(), self.player2())
-        self.interface().after_game()
+        mode = self.interface().after_game()
+        if mode == 1:
+            Game()
+        elif mode == 2:
+            pass
 
     def oneVSComputer(self):
         """
-        Funckja obsługująca grę gracza z komputerem
+        obsługująca grę gracza z komputerem
         """
         self._player1 = Player("Black")
         self._computer1 = Computer("White")
         possible_moves = self.interface().board.total_points()
         self.play_game(self.player1(), self.computer1(), possible_moves)
         self.who_win(self.player1(), self.computer1())
-        self.interface().after_game()
+        mode = self.interface().after_game()
+        if mode == 1:
+            Game()
+        elif mode == 2:
+            pass
 
     def ComputerVSComputer(self):
         """
-        Funckja obsługująca grę komputera z komputerem
+        obsługująca grę komputera z komputerem
         """
         self._computer1 = Computer("Black")
         self._computer2 = Computer("White")
         possible_moves = self.interface().board.total_points()
         self.play_game(self.computer1(), self.computer2(), possible_moves)
         self.who_win(self.computer1(), self.computer2())
-        self.interface().after_game()
+        mode = self.interface().after_game()
+        if mode == 1:
+            Game()
+        elif mode == 2:
+            pass
 
     def who_win(self, player1, player2):
         """
-        funkcja sprawdzająca zwycięzce rozgrywki
+        sprawdzająca zwycięzce rozgrywki
         """
         if player1.points() > player2.points():
             print(f"Gratulacje! Wygrał gracz: {player1.name()}")
@@ -103,7 +115,7 @@ class Game():
 
     def play_game(self, player1, player2, possible_moves):
         """
-        funkcja przeprowadzająca rozgrywkę
+        przeprowadzająca rozgrywkę
         """
         while ((player1.points() + player2.points()) < possible_moves) and (player1.points() != 0) and (player2.points() != 0):
             player1.move_on_board(self.interface().board.table_board)

@@ -1,40 +1,56 @@
 class Player:
     def __init__(self, color=''):
+        """
+        tworzy obiekt klasy gracz i przyjmuje jego nazwe
+        """
         nickname = input("Podaj nazwę gracza: ")
         self._name = nickname
         self._points = 2
         self._color = color
 
     def name(self):
+        """
+        zwraca nazwe gracza
+        """
         return self._name
 
     def points(self):
+        """
+        zwraca punkty gracza
+        """
         return self._points
 
     def set_points(self, points):
+        """
+        ustawia ilość punktów danemu komputerowi
+        """
         self._points = points
 
     def color(self):
+        """
+        zwraca kolor jakim gra dany gracz
+        """
         return self._color
 
     def move_on_board(self, table):
+        """
+        sprawdza poprawność pozycji i ustawia ruch na planszy
+        """
         letter = self.letter(self.color())
-        print(f'Teraz ruch gracza: {self.name()}, twój znak to: {letter}, jeśli nie ma prawdiłowego ruchu wpisz X')
+        print(f'Teraz ruch gracza: {self.name()}, twój znak to: {letter} , jeśli nie ma prawdiłowego ruchu wpisz X')
         row, column = self.get_size((len(table) - 1), (len(table[0]) - 1))
         if row == "X":
             pass
-        elif row == 0 and column == 0:
-            pass
         elif table[row][column] != "0 ":
             print("Dane pole jest zajęte!")
-            row, column = self.get_size((len(table)-1), (len(table[0])-1))
-            while table[row][column] != "0 ":
-                row, column = self.get_size((len(table)-1), (len(table[0])-1))
-            self.place_on_board(table, row, column)
+            self.move_on_board(table)
         else:
             self.place_on_board(table, row, column)
 
     def place_on_board(self, table, row, column):
+        """
+        sprawdza wszystkie możliwości ruchu na planszy
+        """
         self.inrow(table, row, column, self.color())
         self.incolumn(table, row, column, self.color())
         self.diagonally_left_down(table, row, column, self.color())
@@ -44,6 +60,9 @@ class Player:
         self.count_points(table, row, column)
 
     def get_size(self, height, width):
+        """
+        wczytuje ruch gracza
+        """
         row = input("Podaj numer wiersza:\n")
         while not(row.isdigit() and int(row) in range(1, width+1)):
             if row == "X":
@@ -55,6 +74,9 @@ class Player:
         return int(row), int(column)
 
     def letter(self, name=""):
+        """
+        zwraca litere jaką porusza się gracz
+        """
         if name == "Black":
             letter = "M "
         elif name == "White":
@@ -62,6 +84,9 @@ class Player:
         return letter
 
     def inrow(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu w linii
+        """
         letter = self.letter(name)
         table[row][column] = letter
         a = row
@@ -87,6 +112,9 @@ class Player:
                 table[a][i] = f'{letter}'
 
     def incolumn(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu w kolumnie
+        """
         letter = self.letter(name)
         a = row + 1
         b = column
@@ -111,6 +139,9 @@ class Player:
                 table[i][b] = f'{letter}'
 
     def diagonally_right_down(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu po skosie do dołu i w prawo
+        """
         letter = self.letter(name)
         a = row + 1
         b = column + 1
@@ -129,6 +160,9 @@ class Player:
                 b += 1
 
     def diagonally_right_up(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu po skosie do góry i w prawo
+        """
         letter = self.letter(name)
         a = row - 1
         b = column + 1
@@ -147,6 +181,9 @@ class Player:
                 b -= 1
 
     def diagonally_left_up(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu po skosie do góry i w lewo
+        """
         letter = self.letter(name)
         a = row - 1
         b = column - 1
@@ -168,6 +205,9 @@ class Player:
                     b += 1
 
     def diagonally_left_down(self, table, row, column, name=""):
+        """
+        sprawdza możliwość ruchu po skosie do dołu i w lewo
+        """
         letter = self.letter(name)
         a = row + 1
         b = column - 1
@@ -186,6 +226,9 @@ class Player:
                 a -= 1
 
     def count_points(self, table, row=0, column=0):
+        """
+        liczy ilość punktów na planszy i zatwierdza poprawność ruchu
+        """
         letter = self.letter(self.color())
         number_of_appearances = 0
         for i in range(1, (len(table))):
@@ -197,7 +240,6 @@ class Player:
         else:
             if row == 0 and column == 0:
                 self.set_points(number_of_appearances)
-                pass
             else:
                 print("Nieprawidłowy ruch! Proszę podać inne pola.")
                 table[row][column] = "0 "
