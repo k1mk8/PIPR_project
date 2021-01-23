@@ -3,7 +3,7 @@ class Board:
         self._width = width
         self._height = height
         self.make_board()
-        self._possible_moves = width * height
+        self._total_points = width * height
 
     def width(self):
         return self._width
@@ -11,8 +11,8 @@ class Board:
     def height(self):
         return self._height
 
-    def possible_moves(self):
-        return self._possible_moves
+    def total_points(self):
+        return self._total_points
 
     def make_board(self):
         height = self.height()
@@ -29,18 +29,19 @@ class Board:
             else:
                 table[i][0] = str(i)
         self.table_board = table
-        self._possible_moves = height * width - 4
         table[0][0] = "X "
 
     def draw_board(self):
         for i in range(self.height()+1):
-            print(self.table_board[i])
+            space = "  "
+            formated_table = space.join(self.table_board[i])
+            print(formated_table)
 
     def start_board(self):
         height = self.height()//2
         width = self.width()//2
-        self.table_board[height][width] = 'B '
-        self.table_board[height][width + 1] = 'C '
-        self.table_board[height + 1][width] = 'C '
-        self.table_board[height + 1][width + 1] = 'B '
+        self.table_board[height][width] = 'Z '
+        self.table_board[height][width + 1] = 'M '
+        self.table_board[height + 1][width] = 'M '
+        self.table_board[height + 1][width + 1] = 'Z '
         self.draw_board()

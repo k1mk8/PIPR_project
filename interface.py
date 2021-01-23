@@ -3,6 +3,12 @@ from board import Board
 
 class Interface():
     def __init__(self):
+        """
+        Wycztuje wysokość i szerokość planszy
+        Tworzy tablice do gry
+        Inicjuje początkowy wygląd
+        wybiera opcje gry
+        """
         width = self.read_width_of_board()
         height = self.read_height_of_board()
         self.board = Board(width, height)
@@ -18,7 +24,7 @@ class Interface():
             1: "Podaj szerokośc planszy z zakresu od 8 do 30:\n"
         }
         width_of_board = input(dictionary[1])
-        while int(width_of_board) not in range(8, 31):
+        while not(width_of_board.isdigit() and (int(width_of_board) in range(2, 31))):
             width_of_board = input(dictionary[1])
         return int(width_of_board)
 
@@ -27,7 +33,7 @@ class Interface():
             2: "Podaj wysokość planszy z zakresu od 8 do 30:\n"
         }
         height_of_board = input(dictionary[2])
-        while int(height_of_board) not in range(8, 31):
+        while not(height_of_board.isdigit() and (int(height_of_board) in range(2, 31))):
             height_of_board = input(dictionary[2])
         return int(height_of_board)
 
@@ -37,7 +43,7 @@ class Interface():
         print("2 - wybór opcji gry\n")
         print("3 - zakończenie programu\n")
         option = input()
-        while option not in [1, 2, 3]:
+        while option.isdigit() and int(option) not in [1, 2, 3]:
             print("Wybierz co chcesz zrobić:\n")
             print("1 - Ponowna gra\n")
             print("2 - wybór opcji gry\n")
