@@ -32,6 +32,16 @@ class Player:
         """
         return self._color
 
+    def letter(self, name=""):
+        """
+        zwraca litere jaką porusza się gracz
+        """
+        if name == "Black":
+            letter = "M "
+        elif name == "White":
+            letter = "Z "
+        return letter
+
     def move_on_board(self, table):
         """
         sprawdza poprawność pozycji i ustawia ruch na planszy
@@ -73,15 +83,6 @@ class Player:
             column = input("Podaj prawidłowy numer kolumny:\n")
         return int(row), int(column)
 
-    def letter(self, name=""):
-        """
-        zwraca litere jaką porusza się gracz
-        """
-        if name == "Black":
-            letter = "M "
-        elif name == "White":
-            letter = "Z "
-        return letter
 
     def inrow(self, table, row, column, name=""):
         """

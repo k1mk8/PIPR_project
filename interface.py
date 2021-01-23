@@ -29,10 +29,10 @@ class Interface():
         dictionary = {
             1: "Podaj szerokośc planszy z zakresu od 8 do 30:\n"
         }
-        width_of_board = input(dictionary[1])
-        while not(width_of_board.isdigit() and (int(width_of_board) in range(2, 31))):
-            width_of_board = input(dictionary[1])
-        return int(width_of_board)
+        width = input(dictionary[1])
+        while not(width.isdigit() and (int(width) in range(8, 31))):
+            width = input(dictionary[1])
+        return int(width)
 
     def read_height_of_board(self):
         """
@@ -41,10 +41,10 @@ class Interface():
         dictionary = {
             2: "Podaj wysokość planszy z zakresu od 8 do 30:\n"
         }
-        height_of_board = input(dictionary[2])
-        while not(height_of_board.isdigit() and (int(height_of_board) in range(2, 31))):
-            height_of_board = input(dictionary[2])
-        return int(height_of_board)
+        height = input(dictionary[2])
+        while not(height.isdigit() and (int(height) in range(8, 31))):
+            height = input(dictionary[2])
+        return int(height)
 
     def after_game(self):
         """
